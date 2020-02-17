@@ -1,2 +1,9 @@
-<app-dynamic-form [schema]="formSchma"></app-dynamic-form>
+<ng-container *ngIf="showThankYou;else showForm">
+  Thank you for your response.
+  <button (click)="resetForm()">Submit another response</button>
+</ng-container>
+<ng-template #showForm>
+  <app-dynamic-form [formObject]="formSchma[currentFormIndex]" (emitData)="getFormData($event)">
+  </app-dynamic-form>
+</ng-template>
 <router-outlet></router-outlet>

@@ -1,1 +1,29 @@
-<p>dynamic-form works!</p>
+<form class="form" [formGroup]="getForm" (ngSubmit)="submit()">
+  <h3 class="title">{{formObject.stepName}}</h3>
+
+  <ng-container *ngIf="schema">
+    <div class="element" *ngFor="let control of formControls; let i=index;">
+      <label>{{ getControlNameAsLabel(getControlName(control))}} : </label>
+
+      <div [ngSwitch]="schema[i].Type">
+        <div *ngSwitchCase="'textarea'">
+          <textarea cols="30" rows="5" [formControlName]="getControlName(control)"></textarea>
+        </div>
+        <div *ngSwitchCase="'checkbox'">
+          <select [formControlName]="getControlName(control)">
+            <option [value]="option" *ngFor="let option of schema[i].Options">
+              {{option}}
+            </option>
+          </select>
+        </div>
+        <div *ngSwitchDefault>
+          <input type="text" [formControlName]="getControlName(control)">
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <input class="btn-submit" type="submit" value="Submit" [disabled]="!getForm.valid">
+  <br>
+  <br>
+</form>
