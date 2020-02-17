@@ -6,5 +6,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'dynamic-forms';
+  formSchma = [
+    {
+      Field: 'First Name',
+      Type: 'text',
+      Required: true,
+      Length: 30
+    },
+    {
+      Field: 'Last Name',
+      Type: 'text',
+      Required: true,
+      Length: 30
+    },
+    {
+      Field: 'Address',
+      Type: 'textarea',
+      Required: true,
+      Length: 300
+    }
+  ];
 }
